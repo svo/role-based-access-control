@@ -91,3 +91,7 @@ bin/console
 We are using [adr-tools](https://github.com/npryce/adr-tools) to capture project decisions.
 
 [Decision Register](documentation/decisions)
+
+## Design
+
+* ![Class Diagram](https://github.com/svo/role-based-access-control/blob/master/documentation/architecture/class.png?raw=true)

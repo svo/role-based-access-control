@@ -1,0 +1,52 @@
+@startuml
+
+class role {
+  - id:int
+  - name:string
+  - child:[role]
+
+  + get-id():int
+  + get-name():string
+  + add-child-role(role:role)
+  + get-child-role():[role]
+}
+
+class user {
+  - id:int
+  - name:string
+  - role:role
+
+  + get-id():int
+  + get-name():string
+  + get-role():role
+}
+
+class in_memory_user_repository {
+  - records:[user]
+
+  + get-by-id(id:int):user
+  + insert(record:user)
+}
+
+class in_memory_role_repository {
+  - records:[role]
+
+  + get-by-id(id:int):role
+  + insert(record:role)
+}
+
+class user_hierarchy {
+  - role_repository:repository
+  - user_repository:repository
+
+  + get-subordinate(user_id:int):[user]
+}
+
+role *-- role
+user *-- role
+user_hierarchy *-- in_memory_role_repository
+user_hierarchy *-- in_memory_user_repository
+in_memory_user_repository o-- user
+in_memory_role_repository o-- role
+
+@enduml
