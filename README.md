@@ -65,7 +65,7 @@ bin/setup
 You can then run the tests using:
 
 ```
-rake spec
+bundle exec rake
 ```
 
 ## Run
