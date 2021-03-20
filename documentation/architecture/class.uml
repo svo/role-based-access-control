@@ -7,8 +7,8 @@ class role {
 
   + get-id():int
   + get-name():string
-  + add-child-role(role:role)
   + get-child-role():[role]
+  + add-child-role(role:role)
 }
 
 class user {
@@ -21,32 +21,58 @@ class user {
   + get-role():role
 }
 
-class in_memory_user_repository {
-  - records:[user]
+class user_repository {
+  - record:[user]
 
-  + get-by-id(id:int):user
   + insert(record:user)
+  + get-by-id(id:int):user
+  + get-by-role(role:[role]):[user]
 }
 
-class in_memory_role_repository {
-  - records:[role]
+class role_repository {
+  - record:[role]
 
-  + get-by-id(id:int):role
   + insert(record:role)
+  + get-by-id(id:int):role
+  + get-subordinate(role_id:int):[role]
 }
 
 class user_hierarchy {
-  - role_repository:repository
-  - user_repository:repository
+  - role_repository:role_repository
+  - user_repository:user_repository
 
+  + set-role(role:[role])
+  + set-user(user:[user])
   + get-subordinate(user_id:int):[user]
+}
+
+class role_json_marshaller {
+  + from-json(role_json:string):[role]
+  + to-json(role:[role]):string
+}
+
+class user_json_marshaller {
+  + from-json(user_json:string):[user]
+  + to-json(user:[user]):string
+}
+
+class facade {
+  - user_hierarchy:user_hierarchy
+  - role_json_marshaller:role_json_marshaller
+  - user_json_marshaller:user_json_marshaller
+
+  + create-roles(role_json:string)
+  + create-users(user_json:string)
+  + find-subordinate(user_id:int):string
 }
 
 role *-- role
 user *-- role
-user_hierarchy *-- in_memory_role_repository
-user_hierarchy *-- in_memory_user_repository
-in_memory_user_repository o-- user
-in_memory_role_repository o-- role
-
+user_hierarchy *-- role_repository
+user_hierarchy *-- user_repository
+user_repository o-- user
+role_repository o-- role
+facade *-- user_hierarchy
+facade *-- role_json_marshaller
+facade *-- user_json_marshaller
 @enduml
