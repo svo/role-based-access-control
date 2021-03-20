@@ -18,3 +18,19 @@ In reality our software currently has no user type/hierarchy so we are unable to
 ### Proposal
 
 Implement a user hierarchy mechanism that allows for cascading of permissions.
+
+## Build
+
+How you can contribute to the projects development and build locally on a `*nix` environment.
+
+## Test
+
+How you can run the tests on a `*nix` environment to assert the solution behaviours are as expected.
+
+## Run
+
+How to run the solution locally.
+
+## Design Decisions
+
+[Decision Register](documentation/architecture/decisions)
