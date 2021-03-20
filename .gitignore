@@ -17,3 +17,6 @@
 
 # vagrant
 .vagrant
+
+# downloads
+adr-tools-3.0.0.tar.gz

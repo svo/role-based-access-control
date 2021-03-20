@@ -10,6 +10,7 @@
     - git
     - ruby
     - vim
+    - adr-tools
 
   tasks:
     - name: Install avahi for multicast DNS/DNS-SD service discovery
