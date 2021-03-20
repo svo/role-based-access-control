@@ -31,6 +31,8 @@ How you can run the tests on a `*nix` environment to assert the solution behavio
 
 How to run the solution locally on a `*nix` environment.
 
-## Design Decisions
+## Decisions
+
+We are using [adr-tools](https://github.com/npryce/adr-tools) to capture project decisions.
 
 [Decision Register](documentation/decisions)
