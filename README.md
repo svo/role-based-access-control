@@ -21,7 +21,28 @@ Implement a user hierarchy mechanism that allows for cascading of permissions.
 
 ## Build
 
-How you can contribute to the projects development and build locally on a `*nix` environment.
+How you can contribute to the project development and build locally on a `*nix` environment.
+
+This project uses infrastructure as code mechanisms to provide a developer experience. The experience is delivered using [Vagrant](https://www.vagrantup.com), [VirtualBox](https://www.virtualbox.org) and [Ansible](https://github.com/ansible/ansible).
+
+To start and build a `VirtualBox` Virtual Machine for developing on the project, run the following command from the terminal in the current directory.
+
+```
+vagrant up
+```
+
+You may of course decide to just use the ansible configuration as a reference and configure your local machine to reflect the system requirements.
+
+This project is using [Ruby](https://www.ruby-lang.org/en/) as the primary programming language, with the decision being documented [here](documentation/decisions/0002-use-ruby-as-the-programming-language-for-the-project-behaviours.md) and the configured version being `3.0.0`.
+
+### Tested Configurations
+
+| Requirement | Version |
+|--|--|
+| OS | macOS Catalina 10.15.7  |
+| Vagrant | 2.2.14 |
+| VirtualBox | 6.1.18 r142142 (Qt5.6.3) |
+| Ansible | 2.10.6 |
 
 ## Test
 
