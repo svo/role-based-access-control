@@ -1,0 +1,41 @@
+  - name: Install build dependencies
+    apt:
+      pkg: ['libssl-dev', 'libreadline-dev', 'zlib1g-dev', 'gcc', 'build-essential', 'default-libmysqlclient-dev']
+    become: yes
+
+  - name: Install rbenv version manager
+    apt: pkg=rbenv
+    become: yes
+
+  - name: Add rbenv to .bash_profile
+    lineinfile: dest=~/.bash_profile line='eval "$(rbenv init -)"' create=yes
+
+  - name: Create rbenv plugins directory
+    file: path=~/.rbenv/plugins state=directory
+
+  - name: Get ruby-build rbenv plugin
+    git: repo=https://github.com/rbenv/ruby-build.git dest=~/.rbenv/plugins/ruby-build
+
+  - name: Installed?
+    shell: rbenv versions | fgrep {{ ruby_version }}
+    ignore_errors: yes
+    register: ruby_installed
+
+  - name: Install
+    command: rbenv install {{ ruby_version }}
+    when: ruby_installed is failed
+
+  - name: Set {{ ruby_version }} as default
+    command: rbenv global {{ ruby_version }}
+    when: ruby_installed is failed
+
+  - name: Install bundler
+    gem: name=bundler version={{ bundler_version }} executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem
+
+  - name: Add bin directory for gems to path
+    blockinfile:
+      dest: ~/.bashrc
+      create: yes
+      marker: "# {mark} ANSIBLE MANAGED BLOCK (GEMS)"
+      block: |
+        export PATH="$HOME/.gem/ruby/{{ ruby_version }}/bin:$PATH"
