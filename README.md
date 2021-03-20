@@ -33,4 +33,4 @@ How to run the solution locally.
 
 ## Design Decisions
 
-[Decision Register](documentation/architecture/decisions)
+[Decision Register](documentation/decisions)
