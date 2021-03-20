@@ -94,4 +94,6 @@ We are using [adr-tools](https://github.com/npryce/adr-tools) to capture project
 
 ## Design
 
-* ![Class Diagram](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/architecture/class.png)
+### Class Diagram
+
+![Class Diagram](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/architecture/class.png)
