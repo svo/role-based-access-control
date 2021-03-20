@@ -31,7 +31,7 @@ To start and build a `VirtualBox` Virtual Machine for developing on the project,
 vagrant up
 ```
 
-You may of course decide to just use the ansible configuration as a reference and configure your local machine to reflect the system requirements.
+You may decide to just use the `Ansible` configuration as a reference and configure your local machine to reflect the system requirements.
 
 This project is using [Ruby](https://www.ruby-lang.org/en/) as the primary programming language, with the decision being documented [here](documentation/decisions/0002-use-ruby-as-the-programming-language-for-the-project-behaviours.md) and the configured version being `3.0.0`.
 
@@ -39,7 +39,7 @@ This project is using [Ruby](https://www.ruby-lang.org/en/) as the primary progr
 
 | Requirement | Version |
 |--|--|
-| OS | macOS Catalina 10.15.7  |
+| Operating System | macOS Catalina 10.15.7  |
 | Vagrant | 2.2.14 |
 | VirtualBox | 6.1.18 r142142 (Qt5.6.3) |
 | Ansible | 2.10.6 |
@@ -48,9 +48,43 @@ This project is using [Ruby](https://www.ruby-lang.org/en/) as the primary progr
 
 How you can run the tests on a `*nix` environment to assert the solution behaviours are as expected.
 
+If using the `Vagrant` setup run the following:
+
+```
+vagrant up
+vagrant ssh
+cd /vagrant
+```
+
+If you are not using the `Vagrant` setup you will want to install the dependencies using:
+
+```
+bin/setup
+```
+
+You can then run the tests using:
+
+```
+rake spec
+```
+
 ## Run
 
 How to run the solution locally on a `*nix` environment.
+
+If using the `Vagrant` setup run the following:
+
+```
+vagrant up
+vagrant ssh
+cd /vagrant
+```
+
+To run local interactive prompt use the following command:
+
+```
+bin/console
+```
 
 ## Decisions
 

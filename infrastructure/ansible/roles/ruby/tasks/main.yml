@@ -32,6 +32,9 @@
   - name: Install bundler
     gem: name=bundler version={{ bundler_version }} executable=~/.rbenv/versions/{{ ruby_version }}/bin/gem
 
+  - name: Install project dependencies
+    bundler: chdir=/vagrant state=latest executable=~/.rbenv/versions/{{ ruby_version }}/bin/bundle
+
   - name: Add bin directory for gems to path
     blockinfile:
       dest: ~/.bashrc
