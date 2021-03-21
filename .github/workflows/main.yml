@@ -7,12 +7,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
+      uses: ruby/setup-ruby@v2
       with:
         ruby-version: 3.0.0
-    - name: Run the default task
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8.1'
+
+    - name: Install dependencies
       run: |
         gem install bundler -v 2.2.15
-        bundle install
-        bundle exec rake
+        python -m pip install --upgrade pip semgrep
+
+    - name: Run the default task
+      run: |
+        bin/setup
+        bin/test

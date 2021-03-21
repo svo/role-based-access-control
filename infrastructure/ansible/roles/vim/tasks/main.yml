@@ -29,6 +29,7 @@
   - {repo: "https://github.com/aklt/plantuml-syntax.git", name: plantuml-syntax}
   - {repo: "https://github.com/plasticboy/vim-markdown.git", name: vim-markdown}
   - {repo: "https://github.com/pearofducks/ansible-vim.git", name: ansible-vim}
+  - {repo: "https://github.com/returntocorp/semgrep.vim.git", name: semgrep.vim}
 
 - name: Update .vimrc
   blockinfile:
