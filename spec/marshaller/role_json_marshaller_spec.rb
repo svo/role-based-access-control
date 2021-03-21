@@ -10,15 +10,25 @@ RSpec.describe RoleJsonMarshaller do
 
   describe "converts" do
     it "Id property" do
-      json = '{"Id":1}'
+      json = '{"Id":1,"Name":"System Administrator"}'
+      expect(@subject.from_json(json)).to include({ "Id" => 1 })
+    end
 
-      expect(@subject.from_json(json)).to eq({ "Id" => 1 })
+    it "Name property" do
+      json = '{"Id":1,"Name":"System Administrator"}'
+      expect(@subject.from_json(json)).to include({ "Name" => "System Administrator" })
     end
   end
 
   describe "errors" do
-    it "when missing 'Id' property" do
-      json = "{}"
+    it "when missing Id property" do
+      json = '{"Name":"System Administrator"}'
+
+      expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
+    end
+
+    it "when missing Name property" do
+      json = '{"Id":1}'
 
       expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
     end
