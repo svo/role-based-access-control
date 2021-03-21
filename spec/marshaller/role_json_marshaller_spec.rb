@@ -3,6 +3,8 @@
 require "json-schema"
 require "marshaller/role_json_marshaller"
 
+VALID_ROLE_JSON = '{"Id":1,"Name":"System Administrator","Parent":0}'
+
 RSpec.describe RoleJsonMarshaller do
   before(:each) do
     @subject = described_class.new
@@ -10,18 +12,15 @@ RSpec.describe RoleJsonMarshaller do
 
   describe "converts" do
     it "Id property" do
-      json = '{"Id":1,"Name":"System Administrator","Parent":0}'
-      expect(@subject.from_json(json)).to include({ "Id" => 1 })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Id" => 1 })
     end
 
     it "Name property" do
-      json = '{"Id":1,"Name":"System Administrator","Parent":0}'
-      expect(@subject.from_json(json)).to include({ "Name" => "System Administrator" })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Name" => "System Administrator" })
     end
 
     it "Parent property" do
-      json = '{"Id":1,"Name":"System Administrator","Parent":0}'
-      expect(@subject.from_json(json)).to include({ "Parent" => 0 })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Parent" => 0 })
     end
   end
 
@@ -40,6 +39,12 @@ RSpec.describe RoleJsonMarshaller do
 
     it "when missing Parent property" do
       json = '{"Id":1,"Name":"System Administrator"}'
+
+      expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
+    end
+
+    it "when given unexpected property" do
+      json = '{"Id":1,"Name":"System Administrator","Parent":0,"Coconuts":1}'
 
       expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
     end
