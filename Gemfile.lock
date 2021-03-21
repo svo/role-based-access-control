@@ -8,9 +8,19 @@ GEM
   specs:
     ast (2.4.2)
     diff-lcs (1.4.4)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.7)
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
+    puma (5.2.2)
+      nio4r (~> 2.0)
+    rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
+    rack-test (1.1.0)
+      rack (>= 1.0, < 3)
     rainbow (3.0.0)
     rake (13.0.3)
     regexp_parser (2.1.1)
@@ -40,16 +50,26 @@ GEM
     rubocop-ast (1.4.1)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.11.0)
+    ruby2_keywords (0.0.4)
+    sinatra (2.1.0)
+      mustermann (~> 1.0)
+      rack (~> 2.2)
+      rack-protection (= 2.1.0)
+      tilt (~> 2.0)
+    tilt (2.0.10)
     unicode-display_width (2.0.0)
 
 PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  puma (~> 5.2, >= 5.2.2)
+  rack-test (~> 1.1)
   rake (~> 13.0)
   role_based_access_control!
   rspec (~> 3.0)
   rubocop (~> 1.7)
+  sinatra (~> 2.1)
 
 BUNDLED WITH
    2.2.15

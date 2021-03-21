@@ -3,6 +3,8 @@
 require "role_based_access_control"
 
 RSpec.configure do |config|
+  ENV["APP_ENV"] = "test"
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
 
