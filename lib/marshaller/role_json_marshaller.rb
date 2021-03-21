@@ -14,10 +14,11 @@ class RoleJsonMarshaller
   def validate(role)
     JSON::Validator.validate({
                                "type" => "object",
-                               "required" => %w[Id Name],
+                               "required" => %w[Id Name Parent],
                                "properties" => {
                                  "Id" => { "type" => "integer" },
-                                 "Name" => { "type" => "string" }
+                                 "Name" => { "type" => "string" },
+                                 "Parent" => { "type" => "integer" }
                                }
                              }, role)
   end
