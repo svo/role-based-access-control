@@ -2,6 +2,18 @@
 
 require "json-schema"
 
+ROLE_JSON_SCHEMA = {
+  "type" => "array",
+  "items" => {
+    "type" => "object",
+    "properties" => {
+      "Id" => { "type" => "integer" },
+      "Name" => { "type" => "string" },
+      "Parent" => { "type" => "integer" }
+    }
+  }
+}.freeze
+
 class RoleJsonMarshaller
   def from_json(json)
     raise ArgumentError, "Invalid role JSON" unless validate(json)
@@ -12,13 +24,6 @@ class RoleJsonMarshaller
   private
 
   def validate(role)
-    JSON::Validator.validate({
-                               "type" => "object",
-                               "properties" => {
-                                 "Id" => { "type" => "integer" },
-                                 "Name" => { "type" => "string" },
-                                 "Parent" => { "type" => "integer" }
-                               }
-                             }, role, strict: true)
+    JSON::Validator.validate(ROLE_JSON_SCHEMA, role, strict: true)
   end
 end

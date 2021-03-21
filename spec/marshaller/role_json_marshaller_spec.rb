@@ -3,7 +3,7 @@
 require "json-schema"
 require "marshaller/role_json_marshaller"
 
-VALID_ROLE_JSON = '{"Id":1,"Name":"System Administrator","Parent":0}'
+VALID_ROLE_JSON = '[{"Id":1,"Name":"System Administrator","Parent":0}]'
 
 RSpec.describe RoleJsonMarshaller do
   before(:each) do
@@ -12,15 +12,15 @@ RSpec.describe RoleJsonMarshaller do
 
   describe "converts" do
     it "Id property" do
-      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Id" => 1 })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Id" => 1 }))
     end
 
     it "Name property" do
-      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Name" => "System Administrator" })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Name" => "System Administrator" }))
     end
 
     it "Parent property" do
-      expect(@subject.from_json(VALID_ROLE_JSON)).to include({ "Parent" => 0 })
+      expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Parent" => 0 }))
     end
   end
 
