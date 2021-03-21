@@ -1,5 +1,4 @@
 @startuml
-
 class role {
   - id:int
   - name:string
@@ -41,8 +40,8 @@ class user_hierarchy {
   - role_repository:role_repository
   - user_repository:user_repository
 
-  + set-role(role:[role])
-  + set-user(user:[user])
+  + create-role(role:[role])
+  + create-user(user:[user])
   + get-subordinate(user_id:int):[user]
 }
 
@@ -61,8 +60,8 @@ class facade {
   - role_json_marshaller:role_json_marshaller
   - user_json_marshaller:user_json_marshaller
 
-  + create-roles(role_json:string)
-  + create-users(user_json:string)
+  + create-role(role_json:string)
+  + create-user(user_json:string)
   + find-subordinate(user_id:int):string
 }
 
