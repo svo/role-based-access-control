@@ -1,6 +1,7 @@
 # Role Based Access Control
 
-![workflow](https://github.com/svo/role-based-access-control/actions/workflows/main.yml/badge.svg)
+[![Actions Status](https://github.com/svo/role-based-access-control/actions/workflows/main.yml/badge.svg)](https://github.com/svo/role-based-access-control/actions/)
+
 
 ## Problem Statement
 
