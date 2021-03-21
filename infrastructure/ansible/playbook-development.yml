@@ -2,8 +2,8 @@
 - hosts: all
 
   pre_tasks:
-    - name: Update apt cache and upgrade
-      apt: update_cache=yes upgrade=yes
+    - name: Update apt cache
+      apt: update_cache=yes
       become: yes
 
   roles:
