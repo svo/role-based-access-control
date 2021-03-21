@@ -1,5 +1,7 @@
 # Role Based Access Control
 
+![workflow](https://github.com/svo/role-based-access-control/actions/workflows/main.yml/badge.svg)
+
 ## Problem Statement
 
 ### Ideal
