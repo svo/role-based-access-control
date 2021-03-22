@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UserHiearchy
+class UserHierarchy
   def initialize(role_converter, role_repository)
     @role_converter = role_converter
     @role_repository = role_repository

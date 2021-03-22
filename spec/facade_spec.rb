@@ -13,7 +13,7 @@ RSpec.describe "Facade" do
   it "creates roles" do
     json = '{"Id":1,"Name":"System Administrator","Parent":0}'
     marshaller = double(RoleJsonMarshaller)
-    user_hierarchy = double(UserHiearchy)
+    user_hierarchy = double(UserHierarchy)
     role = double
 
     expect(Facade).to receive(:role_json_marshaller).and_return(marshaller)

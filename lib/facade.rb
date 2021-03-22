@@ -3,6 +3,8 @@
 require "sinatra"
 require_relative "user_hierarchy"
 require_relative "marshaller/role_json_marshaller"
+require_relative "converter/role_converter"
+require_relative "repository/role_repository"
 
 module Facade
   def self.role_json_marshaller
@@ -10,7 +12,7 @@ module Facade
   end
 
   def self.user_hierarchy
-    UserHiearchy.new
+    UserHierarchy.new(RoleConverter.new, RoleRepository.new)
   end
 end
 

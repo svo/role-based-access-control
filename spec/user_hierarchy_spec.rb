@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe UserHiearchy do
+RSpec.describe UserHierarchy do
   before(:each) do
     @converter = double(RoleConverter)
     @repository = double(RoleRepository)
