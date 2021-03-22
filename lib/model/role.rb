@@ -8,7 +8,9 @@ class Role
 
   attr_reader :id, :name
 
+  attr_accessor :parent
+
   def ==(other)
-    @id == other.id && @name == other.name
+    @id == other.id && @name == other.name && @parent == other.parent
   end
 end
