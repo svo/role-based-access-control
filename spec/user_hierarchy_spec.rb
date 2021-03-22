@@ -12,7 +12,7 @@ RSpec.describe UserHiearchy do
     role_transfer_object = double
     role = double(Role)
 
-    expect(@converter).to receive(:convert).with(role_transfer_object).and_return([role])
+    expect(@converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
     allow(@repository).to receive(:delete_all)
     expect(@repository).to receive(:insert).with(role)
 
@@ -23,7 +23,7 @@ RSpec.describe UserHiearchy do
     role_transfer_object = double
     role = double(Role)
 
-    allow(@converter).to receive(:convert).with(role_transfer_object).and_return([role])
+    allow(@converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
     expect(@repository).to receive(:delete_all).ordered
     expect(@repository).to receive(:insert).with(role).ordered
 
