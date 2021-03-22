@@ -7,8 +7,8 @@ RSpec.describe RoleConverter do
     @subject = described_class.new
   end
 
-  it "converts the Id property" do
-    expected = Role.new(1)
-    expect(@subject.convert_to_domain([{ "Id" => 1 }])).to eq([expected])
+  it "converts to Role with Id and Name" do
+    expected = Role.new(1, "System Administrator")
+    expect(@subject.convert_to_domain([{ "Id" => 1, "Name" => "System Administrator" }])).to eq([expected])
   end
 end
