@@ -9,7 +9,8 @@ RSpec.describe RoleConverter do
 
   it "converts to Role with Id and Name" do
     expected = [Role.new(1, "System Administrator")]
-    expect(@subject.convert_to_domain([{ "Id" => 1, "Name" => "System Administrator",
+    expect(@subject.convert_to_domain([{ "Id" => 1,
+                                         "Name" => "System Administrator",
                                          "Parent" => nil }])).to eq(expected)
   end
 
