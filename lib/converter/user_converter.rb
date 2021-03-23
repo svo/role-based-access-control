@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../model/User"
+require_relative "../model/user"
 require_relative "../repository/role_repository"
 
 class UserConverter
