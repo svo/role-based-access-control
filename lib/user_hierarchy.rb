@@ -11,6 +11,8 @@ class UserHierarchy
   def create_role(role_transfer_object)
     role = @role_converter.convert_to_domain(role_transfer_object)
 
+    @user_repository.delete_all
+
     @role_repository.delete_all
     role.each do |record|
       @role_repository.insert(record)

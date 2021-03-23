@@ -16,6 +16,7 @@ RSpec.describe UserHierarchy do
       role = double(Role)
 
       expect(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      allow(@user_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:insert).with(role)
 
@@ -27,8 +28,21 @@ RSpec.describe UserHierarchy do
       role = double(Role)
 
       allow(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      allow(@user_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:delete_all).ordered
       expect(@role_repository).to receive(:insert).with(role).ordered
+
+      @subject.create_role(role_transfer_object)
+    end
+
+    it "will clear users when recreating to avoid stale/incorrect associations" do
+      role_transfer_object = double
+      role = double(Role)
+
+      allow(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      expect(@user_repository).to receive(:delete_all)
+      allow(@role_repository).to receive(:delete_all)
+      allow(@role_repository).to receive(:insert).with(role)
 
       @subject.create_role(role_transfer_object)
     end
