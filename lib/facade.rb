@@ -8,14 +8,18 @@ require_relative "repository/role_repository"
 
 module Facade
   def self.role_json_marshaller
-    RoleJsonMarshaller.new
+    @role_json_marshaller ||= RoleJsonMarshaller.new
   end
 
   def self.user_hierarchy
-    UserHierarchy.new(RoleConverter.new, RoleRepository.new)
+    @user_hierarchy ||= UserHierarchy.new(RoleConverter.new, RoleRepository.new)
   end
 end
 
-post "/create-role" do
+post "/role" do
   Facade.user_hierarchy.create_role Facade.role_json_marshaller.from_json request.body.read
+end
+
+get "/role" do
+  Facade.role_json_marshaller.to_json Facade.user_hierarchy.retrieve_role
 end

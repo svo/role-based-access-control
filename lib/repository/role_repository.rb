@@ -14,6 +14,6 @@ class RoleRepository
   end
 
   def insert(role)
-    @role << role
+    @role.push role
   end
 end
