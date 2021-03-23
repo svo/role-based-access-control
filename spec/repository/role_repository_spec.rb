@@ -10,7 +10,7 @@ RSpec.describe RoleRepository do
       expect(@subject.retrieve_all).to eq([])
     end
 
-    it "provided roles when primed" do
+    it "all roles" do
       role = [double(Role)]
       @subject = described_class.new(role)
 
@@ -27,7 +27,7 @@ RSpec.describe RoleRepository do
     expect(@subject.retrieve_all).to eq([])
   end
 
-  it "should instert record" do
+  it "should insert record" do
     role = double(Role)
     @subject = described_class.new
 
