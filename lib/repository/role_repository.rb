@@ -9,6 +9,10 @@ class RoleRepository
     @role.clone
   end
 
+  def retrieve(id)
+    @role.find { |item| item.id == id }
+  end
+
   def delete_all
     @role.clear
   end

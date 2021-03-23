@@ -16,6 +16,15 @@ RSpec.describe RoleRepository do
 
       expect(@subject.retrieve_all).to eq(role)
     end
+
+    it "all roles" do
+      id = 101
+      role = double(Role)
+      @subject = described_class.new([role])
+
+      expect(role).to receive(:id).and_return(id)
+      expect(@subject.retrieve(id)).to eq(role)
+    end
   end
 
   it "should delete all records" do

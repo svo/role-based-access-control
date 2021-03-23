@@ -2,10 +2,12 @@
 
 RSpec.describe UserHierarchy do
   before(:each) do
-    @converter = double(RoleConverter)
-    @repository = double(RoleRepository)
+    @role_converter = double(RoleConverter)
+    @role_repository = double(RoleRepository)
+    @user_converter = double(UserConverter)
+    @user_repository = double(UserRepository)
 
-    @subject = described_class.new(@converter, @repository)
+    @subject = described_class.new(@role_converter, @role_repository, @user_converter, @user_repository)
   end
 
   describe "roles" do
@@ -13,9 +15,9 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      expect(@converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
-      allow(@repository).to receive(:delete_all)
-      expect(@repository).to receive(:insert).with(role)
+      expect(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      allow(@role_repository).to receive(:delete_all)
+      expect(@role_repository).to receive(:insert).with(role)
 
       @subject.create_role(role_transfer_object)
     end
@@ -24,9 +26,9 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      allow(@converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
-      expect(@repository).to receive(:delete_all).ordered
-      expect(@repository).to receive(:insert).with(role).ordered
+      allow(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      expect(@role_repository).to receive(:delete_all).ordered
+      expect(@role_repository).to receive(:insert).with(role).ordered
 
       @subject.create_role(role_transfer_object)
     end
@@ -34,9 +36,41 @@ RSpec.describe UserHierarchy do
     it "are retrieved" do
       role = double(Role)
 
-      expect(@repository).to receive(:retrieve_all).and_return(role)
+      expect(@role_repository).to receive(:retrieve_all).and_return(role)
 
       @subject.retrieve_role
+    end
+  end
+
+  describe "users" do
+    it "are provided converted to repository" do
+      user_transfer_object = double
+      user = double(User)
+
+      expect(@user_converter).to receive(:convert_to_domain).with(user_transfer_object).and_return([user])
+      allow(@user_repository).to receive(:delete_all)
+      expect(@user_repository).to receive(:insert).with(user)
+
+      @subject.create_user(user_transfer_object)
+    end
+
+    it "are cleared before inserting new ones" do
+      user_transfer_object = double
+      user = double(Role)
+
+      allow(@user_converter).to receive(:convert_to_domain).with(user_transfer_object).and_return([user])
+      expect(@user_repository).to receive(:delete_all).ordered
+      expect(@user_repository).to receive(:insert).with(user).ordered
+
+      @subject.create_user(user_transfer_object)
+    end
+
+    it "are retrieved" do
+      user = double(User)
+
+      expect(@user_repository).to receive(:retrieve_all).and_return(user)
+
+      @subject.retrieve_user
     end
   end
 end
