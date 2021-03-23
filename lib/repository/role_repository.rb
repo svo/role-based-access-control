@@ -12,4 +12,8 @@ class RoleRepository
   def delete_all
     @role.clear
   end
+
+  def insert(role)
+    @role << role
+  end
 end

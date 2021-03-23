@@ -26,4 +26,13 @@ RSpec.describe RoleRepository do
 
     expect(@subject.retrieve_all).to eq([])
   end
+
+  it "should instert record" do
+    role = double(Role)
+    @subject = described_class.new
+
+    @subject.insert role
+
+    expect(@subject.retrieve_all).to eq([role])
+  end
 end
