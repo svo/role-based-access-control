@@ -11,6 +11,15 @@ class Role
 
   attr_accessor :parent, :children
 
+  def subordinate(result = [])
+    @children.each do |child|
+      result.push(child)
+      child.subordinate(result)
+    end
+
+    result
+  end
+
   def add_child(child)
     @children.push child
   end
