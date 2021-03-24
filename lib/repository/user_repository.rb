@@ -9,6 +9,14 @@ class UserRepository
     @user.clone
   end
 
+  def retrieve(id)
+    @user.find { |item| item.id == id }
+  end
+
+  def retrieve_with_role(role)
+    @user.select { |item| role.include? item.role }
+  end
+
   def delete_all
     @user.clear
   end

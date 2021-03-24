@@ -39,4 +39,8 @@ class UserHierarchy
   def retrieve_user
     @user_repository.retrieve_all
   end
+
+  def retrieve_user_subordinate(id)
+    @user_repository.retrieve_with_role(@user_repository.retrieve(id).role.subordinate)
+  end
 end

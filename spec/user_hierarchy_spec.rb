@@ -52,7 +52,7 @@ RSpec.describe UserHierarchy do
 
       expect(@role_repository).to receive(:retrieve_all).and_return(role)
 
-      @subject.retrieve_role
+      expect(@subject.retrieve_role).to eq(role)
     end
   end
 
@@ -84,7 +84,24 @@ RSpec.describe UserHierarchy do
 
       expect(@user_repository).to receive(:retrieve_all).and_return(user)
 
-      @subject.retrieve_user
+      expect(@subject.retrieve_user).to eq(user)
+    end
+
+    describe "subordinate" do
+      it "are retrieved" do
+        id = 101
+        user = double(User)
+        parent_role = double(Role)
+        subordinate_role = [double(Role)]
+        subordinate_user = [double(User)]
+
+        expect(@user_repository).to receive(:retrieve).with(id).and_return(user)
+        expect(user).to receive(:role).and_return(parent_role)
+        expect(parent_role).to receive(:subordinate).and_return(subordinate_role)
+        expect(@user_repository).to receive(:retrieve_with_role).and_return(subordinate_user)
+
+        expect(@subject.retrieve_user_subordinate(id)).to eq(subordinate_user)
+      end
     end
   end
 end
