@@ -83,10 +83,27 @@ vagrant ssh
 cd /vagrant
 ```
 
-To run local interactive prompt use the following command:
+To run the web application use the following command:
 
 ```
-bin/console
+bin/run
+```
+
+You can now use the API to make the calls required e.g.:
+
+```
+curl -X POST -d @role.json http://localhost:4567/role
+curl -X POST -d @user.json http://localhost:4567/user
+curl http://localhost:4567/user
+curl http://localhost:4567/role
+curl http://localhost:4567/user/3/subordinate
+curl http://localhost:4567/user/1/subordinate
+```
+
+The examples above can be ran by using the following command:
+
+```
+bin/test-examples
 ```
 
 ## Decisions
