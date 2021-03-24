@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+IFS=$'\n\t'
+set -vx
+
+curl -X POST -d @role.json http://localhost:4567/role
+curl -X POST -d @user.json http://localhost:4567/user
+curl http://localhost:4567/user | json_pp
+curl http://localhost:4567/role | json_pp
+curl http://localhost:4567/user/3/subordinate | json_pp
+curl http://localhost:4567/user/1/subordinate | json_pp
