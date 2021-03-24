@@ -57,3 +57,7 @@ end
 get "/user" do
   Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user
 end
+
+get "/user/:id/subordinate" do |id|
+  Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user_subordinate id.to_i
+end

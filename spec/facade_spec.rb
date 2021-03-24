@@ -47,7 +47,7 @@ RSpec.describe "Facade" do
 
   describe "user" do
     it "creates users" do
-      json = '{"Id":1,"Name":"System Administrator","Parent":0}'
+      json = '[{"Id":1,"Name":"Adam Admin","Role":1}]'
       marshaller = double(UserJsonMarshaller)
       user_hierarchy = double(UserHierarchy)
       user = double
@@ -63,7 +63,7 @@ RSpec.describe "Facade" do
     end
 
     it "retrieves users" do
-      json = '{"Id":1,"Name":"System Administrator","Parent":0}'
+      json = '[{"Id":1,"Name":"Adam Admin","Role":1}]'
       marshaller = double(UserJsonMarshaller)
       user_hierarchy = double(UserHierarchy)
       user = double
@@ -77,6 +77,25 @@ RSpec.describe "Facade" do
 
       expect(last_response).to be_ok
       expect(last_response.body).to eq(json)
+    end
+
+    describe "subordinate" do
+      it "retrieves subordinate for user" do
+        json = '{"Id":1,"Name":"System Administrator","Parent":0}'
+        marshaller = double(UserJsonMarshaller)
+        user_hierarchy = double(UserHierarchy)
+        user = double
+
+        expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+        expect(marshaller).to receive(:to_json).with([user]).and_return(json)
+        expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+        expect(user_hierarchy).to receive(:retrieve_user_subordinate).and_return([user])
+
+        get "/user/1/subordinate"
+
+        expect(last_response).to be_ok
+        expect(last_response.body).to eq(json)
+      end
     end
   end
 end
