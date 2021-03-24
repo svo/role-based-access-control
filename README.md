@@ -2,6 +2,7 @@
 
 [![Actions Status](https://github.com/svo/role-based-access-control/actions/workflows/main.yml/badge.svg)](https://github.com/svo/role-based-access-control/actions/)
 
+[Task Board](https://trello.com/b/x4NnuJmE/)
 
 ## Problem Statement
 
