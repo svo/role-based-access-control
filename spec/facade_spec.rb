@@ -77,6 +77,21 @@ RSpec.describe "Facade" do
       expect(last_response).to be_ok
     end
 
+    it "is a bad request if ArgumentError" do
+      json = '[{"Id":1,"Name":"Adam Admin","Role":1}]'
+      error = "coconuts"
+      error_json = '{"message":"coconuts"}'
+      marshaller = double(UserJsonMarshaller)
+
+      expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+      expect(marshaller).to receive(:from_json).with(json).and_raise(ArgumentError, error)
+
+      post "/user", json
+
+      expect(last_response).to be_bad_request
+      expect(last_response.body).to eq(error_json)
+    end
+
     it "retrieves users" do
       json = '[{"Id":1,"Name":"Adam Admin","Role":1}]'
       marshaller = double(UserJsonMarshaller)

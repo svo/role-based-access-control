@@ -9,6 +9,17 @@ class UserDomainFactory
   end
 
   def build(data_transfer_object)
-    data_transfer_object.map { |user| User.new(user["Id"], user["Name"], @role_repository.retrieve(user["Role"])) }
+    data_transfer_object.map do |user|
+      role_id = user["Role"]
+      role = @role_repository.retrieve(role_id)
+      validate(role, role_id)
+      User.new(user["Id"], user["Name"], role)
+    end
+  end
+
+  private
+
+  def validate(role, role_id)
+    raise ArgumentError, "Missing role #{role_id}" if role.nil?
   end
 end

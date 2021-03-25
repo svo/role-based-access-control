@@ -55,7 +55,11 @@ get "/role" do
 end
 
 post "/user" do
-  Facade.user_hierarchy.create_user Facade.user_json_marshaller.from_json request.body.read
+  begin
+    Facade.user_hierarchy.create_user Facade.user_json_marshaller.from_json request.body.read
+  rescue ArgumentError => e
+    halt 400, { "message" => e.message }.to_json
+  end
 end
 
 get "/user" do

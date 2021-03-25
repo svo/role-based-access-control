@@ -18,4 +18,14 @@ RSpec.describe UserDomainFactory do
                              "Name" => "Adam Admin",
                              "Role" => 101 }])).to eq([user])
   end
+
+  it "errors when role doesn't exist" do
+    expect(@role_repository).to receive(:retrieve).with(101).and_return(nil)
+
+    expect do
+      @subject.build([{ "Id" => 1,
+                        "Name" => "Adam Admin",
+                        "Role" => 101 }])
+    end.to raise_error(ArgumentError, "Missing role 101")
+  end
 end
