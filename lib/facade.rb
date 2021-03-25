@@ -43,7 +43,11 @@ module Facade
 end
 
 post "/role" do
-  Facade.user_hierarchy.create_role Facade.role_json_marshaller.from_json request.body.read
+  begin
+    Facade.user_hierarchy.create_role Facade.role_json_marshaller.from_json request.body.read
+  rescue ArgumentError => e
+    halt 400, { "message" => e.message }.to_json
+  end
 end
 
 get "/role" do
