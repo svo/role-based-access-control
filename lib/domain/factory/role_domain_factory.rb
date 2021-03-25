@@ -4,9 +4,9 @@ require_relative "../role"
 
 class RoleDomainFactory
   def build(data_transfer_object)
-    domain = data_transfer_object.map { |role| Role.new(role["Id"], role["Name"]) }
+    validate_no_duplicate(data_transfer_object)
 
-    validate_no_duplicate(domain)
+    domain = data_transfer_object.map { |role| Role.new(role["Id"], role["Name"]) }
 
     configure_parent(domain, data_transfer_object)
     configure_children(domain)
@@ -29,11 +29,11 @@ class RoleDomainFactory
     end
   end
 
-  def validate_no_duplicate(domain)
-    id = domain.map(&:id)
-    duplicate_id = id.detect { |role_id| id.count(role_id) > 1 }
+  def validate_no_duplicate(data_transfer_object)
+    id = data_transfer_object.map { |item| item.slice("Id") }
+    duplicate = id.detect { |user| id.count(user) > 1 }
 
-    raise ArgumentError, "Duplicate id #{duplicate_id}" unless duplicate_id.nil?
+    raise ArgumentError, "Duplicate id #{duplicate["Id"]}" unless duplicate.nil?
   end
 
   def validate_parent(parent, parent_id)
