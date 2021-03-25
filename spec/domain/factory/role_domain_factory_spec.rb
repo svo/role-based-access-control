@@ -11,7 +11,7 @@ RSpec.describe RoleDomainFactory do
     expected = [Role.new(1, "System Administrator")]
     expect(@subject.build([{ "Id" => 1,
                              "Name" => "System Administrator",
-                             "Parent" => nil }])).to eq(expected)
+                             "Parent" => 0 }])).to eq(expected)
   end
 
   it "sets the parent role" do
@@ -36,5 +36,11 @@ RSpec.describe RoleDomainFactory do
     expected = [parent_role, child_role]
 
     expect(@subject.build(data_transfer_object)).to eq(expected)
+  end
+
+  it "errors when a parent role doesn't exist" do
+    data_transfer_object = [{ "Id" => 2, "Name" => "Location Manager", "Parent" => 1 }]
+
+    expect { @subject.build(data_transfer_object) }.to raise_error(ArgumentError, "Missing parent role 1")
   end
 end

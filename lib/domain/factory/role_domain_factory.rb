@@ -16,6 +16,7 @@ class RoleDomainFactory
     domain.each do |role|
       parent_id = data_transfer_object.find { |item| item["Id"] == role.id }["Parent"]
       role.parent = domain.find { |item| item.id == parent_id }
+      validate(role.parent, parent_id) unless parent_id.zero?
     end
   end
 
@@ -24,5 +25,9 @@ class RoleDomainFactory
       children = domain.select { |role| role.parent == parent }
       children.each { |child| parent.add_child child }
     end
+  end
+
+  def validate(parent, parent_id)
+    raise ArgumentError, "Missing parent role #{parent_id}" if parent.nil?
   end
 end
