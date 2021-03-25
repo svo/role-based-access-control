@@ -3,10 +3,10 @@
 require "sinatra"
 require_relative "user_hierarchy"
 require_relative "marshaller/role_json_marshaller"
-require_relative "factory/role_domain_factory"
+require_relative "domain/factory/role_domain_factory"
 require_relative "repository/role_repository"
 require_relative "marshaller/user_json_marshaller"
-require_relative "factory/user_domain_factory"
+require_relative "domain/factory/user_domain_factory"
 require_relative "repository/user_repository"
 
 module Facade

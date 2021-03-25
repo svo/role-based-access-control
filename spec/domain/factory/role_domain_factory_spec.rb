@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "factory/role_domain_factory"
+require "domain/factory/role_domain_factory"
 
 RSpec.describe RoleDomainFactory do
   before(:each) do

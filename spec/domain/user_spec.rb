@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "model/user"
+require "domain/user"
 
 RSpec.describe User do
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "../model/role"
+require_relative "../role"
 
 class RoleDomainFactory
   def build(data_transfer_object)

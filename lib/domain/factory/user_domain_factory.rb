@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative "../model/user"
-require_relative "../repository/role_repository"
+require_relative "../user"
+require_relative "../../repository/role_repository"
 
 class UserDomainFactory
   def initialize(role_repository)

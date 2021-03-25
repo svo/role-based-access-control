@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "model/role"
+require "domain/role"
 
 RSpec.describe Role do
   it "has subordinate hierarchy" do
