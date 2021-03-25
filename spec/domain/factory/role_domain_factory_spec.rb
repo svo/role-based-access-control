@@ -43,4 +43,11 @@ RSpec.describe RoleDomainFactory do
 
     expect { @subject.build(data_transfer_object) }.to raise_error(ArgumentError, "Missing parent role 1")
   end
+
+  it "errors when a role has a duplicate id" do
+    data_transfer_object = [{ "Id" => 1, "Name" => "System Administrator", "Parent" => 0 },
+                            { "Id" => 1, "Name" => "Location Manager", "Parent" => 0 }]
+
+    expect { @subject.build(data_transfer_object) }.to raise_error(ArgumentError, "Duplicate id 1")
+  end
 end
