@@ -16,7 +16,7 @@ RSpec.describe UserJsonMarshaller do
   end
 
   describe "from json" do
-    describe "converts" do
+    describe "marshalls" do
       it "Id property" do
         expect(@subject.from_json(VALID_USER_JSON)).to include(include({ "Id" => 1 }))
       end
@@ -68,7 +68,7 @@ RSpec.describe UserJsonMarshaller do
   end
 
   describe "from json" do
-    describe "converts" do
+    describe "marshalls" do
       it "user to json" do
         role = Role.new(101, "System Administrator")
         user = User.new(1, "Adam Admin", role)

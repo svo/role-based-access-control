@@ -3,10 +3,10 @@
 require "sinatra"
 require_relative "user_hierarchy"
 require_relative "marshaller/role_json_marshaller"
-require_relative "converter/role_converter"
+require_relative "factory/role_domain_factory"
 require_relative "repository/role_repository"
 require_relative "marshaller/user_json_marshaller"
-require_relative "converter/user_converter"
+require_relative "factory/user_domain_factory"
 require_relative "repository/user_repository"
 
 module Facade
@@ -22,22 +22,22 @@ module Facade
     @role_repository ||= RoleRepository.new
   end
 
-  def self.role_converter
-    @role_converter ||= RoleConverter.new
+  def self.role_domain_factory
+    @role_domain_factory ||= RoleDomainFactory.new
   end
 
   def self.user_repository
     @user_repository ||= UserRepository.new
   end
 
-  def self.user_converter
-    @user_converter ||= UserConverter.new(@role_repository)
+  def self.user_domain_factory
+    @user_domain_factory ||= UserDomainFactory.new(@role_repository)
   end
 
   def self.user_hierarchy
-    @user_hierarchy ||= UserHierarchy.new(role_converter,
+    @user_hierarchy ||= UserHierarchy.new(role_domain_factory,
                                           role_repository,
-                                          user_converter,
+                                          user_domain_factory,
                                           user_repository)
   end
 end

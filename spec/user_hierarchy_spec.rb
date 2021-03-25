@@ -2,20 +2,20 @@
 
 RSpec.describe UserHierarchy do
   before(:each) do
-    @role_converter = double(RoleConverter)
+    @role_domain_factory = double(RoleDomainFactory)
     @role_repository = double(RoleRepository)
-    @user_converter = double(UserConverter)
+    @user_domain_factory = double(UserDomainFactory)
     @user_repository = double(UserRepository)
 
-    @subject = described_class.new(@role_converter, @role_repository, @user_converter, @user_repository)
+    @subject = described_class.new(@role_domain_factory, @role_repository, @user_domain_factory, @user_repository)
   end
 
   describe "roles" do
-    it "are provided converted to repository" do
+    it "are provided as the domain representation to the repository" do
       role_transfer_object = double
       role = double(Role)
 
-      expect(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      expect(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
       allow(@user_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:insert).with(role)
@@ -27,7 +27,7 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      allow(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      allow(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
       allow(@user_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:delete_all).ordered
       expect(@role_repository).to receive(:insert).with(role).ordered
@@ -39,7 +39,7 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      allow(@role_converter).to receive(:convert_to_domain).with(role_transfer_object).and_return([role])
+      allow(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
       expect(@user_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:insert).with(role)
@@ -57,11 +57,11 @@ RSpec.describe UserHierarchy do
   end
 
   describe "users" do
-    it "are provided converted to repository" do
+    it "are provided as the domain representation to the repository" do
       user_transfer_object = double
       user = double(User)
 
-      expect(@user_converter).to receive(:convert_to_domain).with(user_transfer_object).and_return([user])
+      expect(@user_domain_factory).to receive(:build).with(user_transfer_object).and_return([user])
       allow(@user_repository).to receive(:delete_all)
       expect(@user_repository).to receive(:insert).with(user)
 
@@ -72,7 +72,7 @@ RSpec.describe UserHierarchy do
       user_transfer_object = double
       user = double(Role)
 
-      allow(@user_converter).to receive(:convert_to_domain).with(user_transfer_object).and_return([user])
+      allow(@user_domain_factory).to receive(:build).with(user_transfer_object).and_return([user])
       expect(@user_repository).to receive(:delete_all).ordered
       expect(@user_repository).to receive(:insert).with(user).ordered
 

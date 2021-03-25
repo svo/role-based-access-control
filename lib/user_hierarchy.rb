@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
 class UserHierarchy
-  def initialize(role_converter, role_repository, user_converter, user_repository)
-    @role_converter = role_converter
+  def initialize(role_domain_factory, role_repository, user_domain_factory, user_repository)
+    @role_domain_factory = role_domain_factory
     @role_repository = role_repository
-    @user_converter = user_converter
+    @user_domain_factory = user_domain_factory
     @user_repository = user_repository
   end
 
   def create_role(role_transfer_object)
-    role = @role_converter.convert_to_domain(role_transfer_object)
+    role = @role_domain_factory.build(role_transfer_object)
 
     @user_repository.delete_all
 
@@ -26,7 +26,7 @@ class UserHierarchy
   end
 
   def create_user(user_transfer_object)
-    user = @user_converter.convert_to_domain(user_transfer_object)
+    user = @user_domain_factory.build(user_transfer_object)
 
     @user_repository.delete_all
     user.each do |record|

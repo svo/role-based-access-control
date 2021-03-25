@@ -16,7 +16,7 @@ RSpec.describe RoleJsonMarshaller do
   end
 
   describe "from json" do
-    describe "converts" do
+    describe "marshalls" do
       it "Id property" do
         expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Id" => 1 }))
       end
@@ -68,7 +68,7 @@ RSpec.describe RoleJsonMarshaller do
   end
 
   describe "from json" do
-    describe "converts" do
+    describe "marshalls" do
       it "role to json with no parent" do
         expected = '[{"Id":1,"Name":"System Administrator","Parent":0}]'
         expect(@subject.to_json([Role.new(1, "System Administrator")])).to eq(expected)

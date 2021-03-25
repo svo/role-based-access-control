@@ -2,8 +2,8 @@
 
 require_relative "../model/role"
 
-class RoleConverter
-  def convert_to_domain(data_transfer_object)
+class RoleDomainFactory
+  def build(data_transfer_object)
     domain = data_transfer_object.map { |role| Role.new(role["Id"], role["Name"]) }
 
     configure_parent(domain, data_transfer_object)

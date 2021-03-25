@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require "converter/role_converter"
+require "factory/role_domain_factory"
 
-RSpec.describe RoleConverter do
+RSpec.describe RoleDomainFactory do
   before(:each) do
     @subject = described_class.new
   end
 
-  it "converts to Role with Id and Name" do
+  it "builds Role with Id and Name" do
     expected = [Role.new(1, "System Administrator")]
-    expect(@subject.convert_to_domain([{ "Id" => 1,
-                                         "Name" => "System Administrator",
-                                         "Parent" => nil }])).to eq(expected)
+    expect(@subject.build([{ "Id" => 1,
+                             "Name" => "System Administrator",
+                             "Parent" => nil }])).to eq(expected)
   end
 
   it "sets the parent role" do
@@ -23,7 +23,7 @@ RSpec.describe RoleConverter do
     child_role.parent = parent_role
     expected = [parent_role, child_role]
 
-    expect(@subject.convert_to_domain(data_transfer_object)).to eq(expected)
+    expect(@subject.build(data_transfer_object)).to eq(expected)
   end
 
   it "sets the child roles" do
@@ -35,6 +35,6 @@ RSpec.describe RoleConverter do
     child_role.parent = parent_role
     expected = [parent_role, child_role]
 
-    expect(@subject.convert_to_domain(data_transfer_object)).to eq(expected)
+    expect(@subject.build(data_transfer_object)).to eq(expected)
   end
 end
