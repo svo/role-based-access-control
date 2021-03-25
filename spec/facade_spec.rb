@@ -126,6 +126,19 @@ RSpec.describe "Facade" do
         expect(last_response).to be_ok
         expect(last_response.body).to eq(json)
       end
+
+      it "is not found if NotFoundError" do
+        error = "coconuts"
+        error_json = '{"message":"coconuts"}'
+        user_hierarchy = double(UserHierarchy)
+        expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+        expect(user_hierarchy).to receive(:retrieve_user_subordinate).and_raise(NotFoundError, error)
+
+        get "/user/1/subordinate"
+
+        expect(last_response).to be_not_found
+        expect(last_response.body).to eq(error_json)
+      end
     end
   end
 end

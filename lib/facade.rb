@@ -67,5 +67,9 @@ get "/user" do
 end
 
 get "/user/:id/subordinate" do |id|
-  Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user_subordinate id.to_i
+  begin
+    Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user_subordinate id.to_i
+  rescue NotFoundError => e
+    halt 404, { "message" => e.message }.to_json
+  end
 end

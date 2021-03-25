@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "error/not_found_error"
+
 class UserHierarchy
   def initialize(role_domain_factory, role_repository, user_domain_factory, user_repository)
     @role_domain_factory = role_domain_factory
@@ -41,6 +43,10 @@ class UserHierarchy
   end
 
   def retrieve_user_subordinate(id)
-    @user_repository.retrieve_with_role(@user_repository.retrieve(id).role.subordinate)
+    user = @user_repository.retrieve(id)
+
+    raise NotFoundError, "Missing user #{id}" if user.nil?
+
+    @user_repository.retrieve_with_role(user.role.subordinate)
   end
 end

@@ -102,6 +102,16 @@ RSpec.describe UserHierarchy do
 
         expect(@subject.retrieve_user_subordinate(id)).to eq(subordinate_user)
       end
+
+      it "errors when user for subordinate request can't be found" do
+        id = 101
+
+        expect(@user_repository).to receive(:retrieve).with(id).and_return(nil)
+
+        expect do
+          @subject.retrieve_user_subordinate(id)
+        end.to raise_error(NotFoundError, "Missing user 101")
+      end
     end
   end
 end
