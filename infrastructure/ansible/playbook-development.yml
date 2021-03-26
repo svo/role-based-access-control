@@ -6,6 +6,14 @@
       apt: update_cache=yes
       become: yes
 
+    - name: Install curl
+      apt: pkg=curl
+      become: yes
+
+    - name: Install apt-utils
+      apt: pkg=apt-utils
+      become: yes
+
   roles:
     - avahi
     - git
@@ -15,8 +23,15 @@
     - plantuml
     - python
     - semgrep
+    - ansible
+    - packer
+    - docker
 
   post_tasks:
+    - name: Add docker group for user
+      user: name=vagrant groups=docker append=yes
+      become: yes
+
     - name: Set python3 as default python
       alternatives:
         name: python

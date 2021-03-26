@@ -16,4 +16,4 @@ Documentation:
   Enabled: false
 
 Metrics/BlockLength:
-  ExcludedMethods: ['describe']
+  ExcludedMethods: ['describe', 'Vagrant.configure']

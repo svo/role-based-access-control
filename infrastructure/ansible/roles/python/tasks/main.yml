@@ -28,11 +28,18 @@
       fi
   become: yes
 
+- name: Installed?
+  shell: bash -lc "python --version | fgrep 3.8.1"
+  ignore_errors: yes
+  register: python_installed
+
 - name: Install python
   shell: bash -lc "pyenv install 3.8.1"
+  when: python_installed is failed
 
 - name: Set python version as default
   shell: bash -lc "pyenv global 3.8.1"
+  when: python_installed is failed
 
 - name: Upgrade pip
   pip: name=pip state=latest extra_args=--upgrade executable=/usr/lib/pyenv/shims/pip3.8
