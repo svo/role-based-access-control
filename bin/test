@@ -3,4 +3,7 @@ set -euo pipefail
 IFS=$'\n\t'
 set -vx
 
-bundle exec rake && semgrep --config "p/ruby"
+bundle exec rake &&
+semgrep --config "p/ruby" &&
+semgrep --config "p/r2c-ci" &&
+semgrep --config "p/r2c-security-audit"
