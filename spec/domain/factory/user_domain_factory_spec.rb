@@ -9,7 +9,7 @@ RSpec.describe UserDomainFactory do
     @subject = described_class.new(@role_repository)
   end
 
-  it "builds User" do
+  it "builds user" do
     role = double(Role)
     user = User.new(1, "Adam Admin", role)
 
@@ -20,7 +20,7 @@ RSpec.describe UserDomainFactory do
                              "Role" => 101 }])).to eq([user])
   end
 
-  it "errors when role doesn't exist" do
+  it "errors when user role doesn't exist" do
     allow(@role_repository).to receive(:retrieve).with(101).and_return(nil)
 
     expect do

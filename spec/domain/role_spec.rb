@@ -3,7 +3,7 @@
 require "domain/role"
 
 RSpec.describe Role do
-  it "has subordinate hierarchy" do
+  it "has a subordinate hierarchy" do
     parent = Role.new(1, "System Administrator")
     child = Role.new(2, "Location Manager")
     child_of_child = Role.new(3, "Supervisor")

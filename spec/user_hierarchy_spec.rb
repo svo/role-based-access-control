@@ -11,7 +11,7 @@ RSpec.describe UserHierarchy do
   end
 
   describe "roles" do
-    it "are provided as the domain representation to the repository" do
+    it "has provided the domain representation to the repository" do
       role_transfer_object = double
       role = double(Role)
 
@@ -23,7 +23,7 @@ RSpec.describe UserHierarchy do
       @subject.create_role(role_transfer_object)
     end
 
-    it "are cleared before inserting new ones" do
+    it "has cleared records before inserting new ones" do
       role_transfer_object = double
       role = double(Role)
 
@@ -35,7 +35,7 @@ RSpec.describe UserHierarchy do
       @subject.create_role(role_transfer_object)
     end
 
-    it "will clear users when recreating to avoid stale/incorrect associations" do
+    it "has cleared users when recreating to avoid stale/incorrect associations" do
       role_transfer_object = double
       role = double(Role)
 
@@ -47,8 +47,8 @@ RSpec.describe UserHierarchy do
       @subject.create_role(role_transfer_object)
     end
 
-    it "are retrieved" do
-      role = double(Role)
+    it "has retrieved all the roles" do
+      role = [double(Role)]
 
       expect(@role_repository).to receive(:retrieve_all).and_return(role)
 
@@ -57,7 +57,7 @@ RSpec.describe UserHierarchy do
   end
 
   describe "users" do
-    it "are provided as the domain representation to the repository" do
+    it "has provided the domain representation to the repository" do
       user_transfer_object = double
       user = double(User)
 
@@ -68,7 +68,7 @@ RSpec.describe UserHierarchy do
       @subject.create_user(user_transfer_object)
     end
 
-    it "are cleared before inserting new ones" do
+    it "has cleared records before inserting new ones" do
       user_transfer_object = double
       user = double(Role)
 
@@ -79,7 +79,7 @@ RSpec.describe UserHierarchy do
       @subject.create_user(user_transfer_object)
     end
 
-    it "are retrieved" do
+    it "has retrieved all the users" do
       user = double(User)
 
       expect(@user_repository).to receive(:retrieve_all).and_return(user)
@@ -88,7 +88,7 @@ RSpec.describe UserHierarchy do
     end
 
     describe "subordinate" do
-      it "are retrieved" do
+      it "has retrieved all the subordinates for a given user" do
         id = 101
         user = double(User)
         parent_role = double(Role)
@@ -103,7 +103,7 @@ RSpec.describe UserHierarchy do
         expect(@subject.retrieve_user_subordinate(id)).to eq(subordinate_user)
       end
 
-      it "errors when user for subordinate request can't be found" do
+      it "errors when user for subordinate request is not found" do
         id = 101
 
         expect(@user_repository).to receive(:retrieve).with(id).and_return(nil)

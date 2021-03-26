@@ -27,7 +27,7 @@ RSpec.describe "Facade" do
       expect(last_response).to be_ok
     end
 
-    it "is a bad request if ArgumentError" do
+    it "is a BAD REQUEST if it encounters an ArgumentError" do
       json = '{"Id":1,"Name":"System Administrator"}'
       error = "coconuts"
       error_json = '{"message":"coconuts"}'
@@ -77,7 +77,7 @@ RSpec.describe "Facade" do
       expect(last_response).to be_ok
     end
 
-    it "is a bad request if ArgumentError" do
+    it "is a BAD REQUEST if it encounters an ArgumentError" do
       json = '[{"Id":1,"Name":"Adam Admin","Role":1}]'
       error = "coconuts"
       error_json = '{"message":"coconuts"}'
@@ -127,7 +127,7 @@ RSpec.describe "Facade" do
         expect(last_response.body).to eq(json)
       end
 
-      it "is not found if NotFoundError" do
+      it "is NOT FOUND if it encounters a NotFoundError" do
         error = "coconuts"
         error_json = '{"message":"coconuts"}'
         user_hierarchy = double(UserHierarchy)

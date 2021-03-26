@@ -16,20 +16,20 @@ RSpec.describe RoleJsonMarshaller do
   end
 
   describe "from json" do
-    describe "marshalls" do
-      it "Id property" do
+    describe "marshalls to a hash" do
+      it "has an Id property" do
         expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Id" => 1 }))
       end
 
-      it "Name property" do
+      it "has a Name property" do
         expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Name" => "System Administrator" }))
       end
 
-      it "Parent property" do
+      it "has a Parent property" do
         expect(@subject.from_json(VALID_ROLE_JSON)).to include(include({ "Parent" => 0 }))
       end
 
-      it "provided example" do
+      it "matches provided example" do
         expect(@subject.from_json(PROVIDED_EXAMPLE_ROLE_JSON)).to eq(
           [{ "Id" => 1, "Name" => "System Administrator", "Parent" => 0 },
            { "Id" => 2, "Name" => "Location Manager", "Parent" => 1 },
@@ -40,26 +40,26 @@ RSpec.describe RoleJsonMarshaller do
       end
     end
 
-    describe "errors" do
-      it "when missing Id property" do
+    describe "error whens" do
+      it "is missing the Id property" do
         json = '{"Name":"System Administrator","Parent":0}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
       end
 
-      it "when missing Name property" do
+      it "is missing the Name property" do
         json = '{"Id":1,"Parent":0}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
       end
 
-      it "when missing Parent property" do
+      it "is missing the Parent property" do
         json = '{"Id":1,"Name":"System Administrator"}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
       end
 
-      it "when given unexpected property" do
+      it "is given an unexpected property" do
         json = '{"Id":1,"Name":"System Administrator","Parent":0,"Coconuts":1}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid role JSON")
@@ -67,20 +67,18 @@ RSpec.describe RoleJsonMarshaller do
     end
   end
 
-  describe "from json" do
-    describe "marshalls" do
-      it "role to json with no parent" do
-        expected = '[{"Id":1,"Name":"System Administrator","Parent":0}]'
-        expect(@subject.to_json([Role.new(1, "System Administrator")])).to eq(expected)
-      end
+  describe "to json" do
+    it "marshalls role with no parent role" do
+      expected = '[{"Id":1,"Name":"System Administrator","Parent":0}]'
+      expect(@subject.to_json([Role.new(1, "System Administrator")])).to eq(expected)
+    end
 
-      it "role to json with parent" do
-        parent = Role.new(1, "System Administrator")
-        child = Role.new(2, "Location Manager")
-        child.parent = parent
+    it "marshalls role with a parent role" do
+      parent = Role.new(1, "System Administrator")
+      child = Role.new(2, "Location Manager")
+      child.parent = parent
 
-        expect(@subject.to_json([child])).to eq('[{"Id":2,"Name":"Location Manager","Parent":1}]')
-      end
+      expect(@subject.to_json([child])).to eq('[{"Id":2,"Name":"Location Manager","Parent":1}]')
     end
   end
 end

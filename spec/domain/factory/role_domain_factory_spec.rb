@@ -7,7 +7,7 @@ RSpec.describe RoleDomainFactory do
     @subject = described_class.new
   end
 
-  it "builds Role with Id and Name" do
+  it "builds role with Id and Name" do
     expected = [Role.new(1, "System Administrator")]
     expect(@subject.build([{ "Id" => 1,
                              "Name" => "System Administrator",

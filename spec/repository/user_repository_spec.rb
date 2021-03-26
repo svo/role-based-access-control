@@ -3,21 +3,21 @@
 require "repository/user_repository"
 
 RSpec.describe UserRepository do
-  describe "should retrieve" do
-    it "no records by default" do
+  describe "retrieves" do
+    it "has no records by default" do
       @subject = described_class.new
 
       expect(@subject.retrieve_all).to eq([])
     end
 
-    it "all users" do
+    it "has all the users" do
       user = [double(User)]
       @subject = described_class.new(user)
 
       expect(@subject.retrieve_all).to eq(user)
     end
 
-    it "a user" do
+    it "has a given user" do
       id = 101
       user = double(User)
       @subject = described_class.new([user])
@@ -26,7 +26,7 @@ RSpec.describe UserRepository do
       expect(@subject.retrieve(id)).to eq(user)
     end
 
-    it "user with role" do
+    it "has all the users with a given role" do
       user1 = double(User)
       user2 = double(User)
       user3 = double(User)
@@ -42,7 +42,7 @@ RSpec.describe UserRepository do
     end
   end
 
-  it "should delete all records" do
+  it "deletes all records" do
     user = [double(User)]
     @subject = described_class.new(user)
 
@@ -51,7 +51,7 @@ RSpec.describe UserRepository do
     expect(@subject.retrieve_all).to eq([])
   end
 
-  it "should insert record" do
+  it "inserts a record" do
     user = double(User)
     @subject = described_class.new
 

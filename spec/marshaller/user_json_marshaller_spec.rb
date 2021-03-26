@@ -16,20 +16,20 @@ RSpec.describe UserJsonMarshaller do
   end
 
   describe "from json" do
-    describe "marshalls" do
-      it "Id property" do
+    describe "marshalls to a hash" do
+      it "has an Id property" do
         expect(@subject.from_json(VALID_USER_JSON)).to include(include({ "Id" => 1 }))
       end
 
-      it "Name property" do
+      it "has a Name property" do
         expect(@subject.from_json(VALID_USER_JSON)).to include(include({ "Name" => "Adam Admin" }))
       end
 
-      it "Role property" do
+      it "has a Role property" do
         expect(@subject.from_json(VALID_USER_JSON)).to include(include({ "Role" => 1 }))
       end
 
-      it "provided example" do
+      it "matches provided example" do
         expect(@subject.from_json(PROVIDED_EXAMPLE_USER_JSON)).to eq(
           [{ "Id" => 1, "Name" => "Adam Admin", "Role" => 1 },
            { "Id" => 2, "Name" => "Emily Employee", "Role" => 4 },
@@ -40,26 +40,26 @@ RSpec.describe UserJsonMarshaller do
       end
     end
 
-    describe "errors" do
-      it "when missing Id property" do
+    describe "error whens" do
+      it "is missing the Id property" do
         json = '{"Name":"System Administrator","Role":0}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid user JSON")
       end
 
-      it "when missing Name property" do
+      it "is missing the Name property" do
         json = '{"Id":1,"Role":0}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid user JSON")
       end
 
-      it "when missing Role property" do
+      it "is missing the Role property" do
         json = '{"Id":1,"Name":"System Administrator"}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid user JSON")
       end
 
-      it "when given unexpected property" do
+      it "is given an unexpected property" do
         json = '{"Id":1,"Name":"System Administrator","Role":0,"Coconuts":1}'
 
         expect { @subject.from_json(json) }.to raise_error(ArgumentError, "Invalid user JSON")
@@ -67,14 +67,12 @@ RSpec.describe UserJsonMarshaller do
     end
   end
 
-  describe "from json" do
-    describe "marshalls" do
-      it "user to json" do
-        role = Role.new(101, "System Administrator")
-        user = User.new(1, "Adam Admin", role)
+  describe "to json" do
+    it "marshalls user" do
+      role = Role.new(101, "System Administrator")
+      user = User.new(1, "Adam Admin", role)
 
-        expect(@subject.to_json([user])).to eq('[{"Id":1,"Name":"Adam Admin","Role":101}]')
-      end
+      expect(@subject.to_json([user])).to eq('[{"Id":1,"Name":"Adam Admin","Role":101}]')
     end
   end
 end

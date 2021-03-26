@@ -4,20 +4,20 @@ require "repository/role_repository"
 
 RSpec.describe RoleRepository do
   describe "retrieves" do
-    it "no records by default" do
+    it "has no records by default" do
       @subject = described_class.new
 
       expect(@subject.retrieve_all).to eq([])
     end
 
-    it "all roles" do
+    it "has all the roles" do
       role = [double(Role)]
       @subject = described_class.new(role)
 
       expect(@subject.retrieve_all).to eq(role)
     end
 
-    it "a role" do
+    it "has a given role" do
       id = 101
       role = double(Role)
       @subject = described_class.new([role])
@@ -36,7 +36,7 @@ RSpec.describe RoleRepository do
     expect(@subject.retrieve_all).to eq([])
   end
 
-  it "inserts record" do
+  it "inserts a record" do
     role = double(Role)
     @subject = described_class.new
 
