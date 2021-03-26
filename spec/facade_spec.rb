@@ -3,11 +3,41 @@
 require "facade"
 require "rack/test"
 
-RSpec.describe "Facade" do
+RSpec.describe "Context" do
   include Rack::Test::Methods
 
   def app
     Sinatra::Application
+  end
+
+  describe "context" do
+    it "has a role JSON marshaller" do
+      expect(Context.role_json_marshaller).to be_an_instance_of(RoleJsonMarshaller)
+    end
+
+    it "has a user JSON marshaller" do
+      expect(Context.user_json_marshaller).to be_an_instance_of(UserJsonMarshaller)
+    end
+
+    it "has a role repository" do
+      expect(Context.role_repository).to be_an_instance_of(RoleRepository)
+    end
+
+    it "has a role domain factory" do
+      expect(Context.role_domain_factory).to be_an_instance_of(RoleDomainFactory)
+    end
+
+    it "has a user repository" do
+      expect(Context.user_repository).to be_an_instance_of(UserRepository)
+    end
+
+    it "has a user domain factory" do
+      expect(Context.user_domain_factory).to be_an_instance_of(UserDomainFactory)
+    end
+
+    it "has a user hierarchy" do
+      expect(Context.user_hierarchy).to be_an_instance_of(UserHierarchy)
+    end
   end
 
   describe "role" do
@@ -17,9 +47,9 @@ RSpec.describe "Facade" do
       user_hierarchy = double(UserHierarchy)
       role = double
 
-      expect(Facade).to receive(:role_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:role_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:from_json).with(json).and_return([role])
-      expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+      expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
       expect(user_hierarchy).to receive(:create_role).with([role])
 
       post "/role", json
@@ -33,7 +63,7 @@ RSpec.describe "Facade" do
       error_json = '{"message":"coconuts"}'
       marshaller = double(RoleJsonMarshaller)
 
-      expect(Facade).to receive(:role_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:role_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:from_json).with(json).and_raise(ArgumentError, error)
 
       post "/role", json
@@ -48,9 +78,9 @@ RSpec.describe "Facade" do
       user_hierarchy = double(UserHierarchy)
       role = double
 
-      expect(Facade).to receive(:role_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:role_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:to_json).with([role]).and_return(json)
-      expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+      expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
       expect(user_hierarchy).to receive(:retrieve_role).and_return([role])
 
       get "/role"
@@ -67,9 +97,9 @@ RSpec.describe "Facade" do
       user_hierarchy = double(UserHierarchy)
       user = double
 
-      expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:user_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:from_json).with(json).and_return([user])
-      expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+      expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
       expect(user_hierarchy).to receive(:create_user).with([user])
 
       post "/user", json
@@ -83,7 +113,7 @@ RSpec.describe "Facade" do
       error_json = '{"message":"coconuts"}'
       marshaller = double(UserJsonMarshaller)
 
-      expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:user_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:from_json).with(json).and_raise(ArgumentError, error)
 
       post "/user", json
@@ -98,9 +128,9 @@ RSpec.describe "Facade" do
       user_hierarchy = double(UserHierarchy)
       user = double
 
-      expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+      expect(Context).to receive(:user_json_marshaller).and_return(marshaller)
       expect(marshaller).to receive(:to_json).with([user]).and_return(json)
-      expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+      expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
       expect(user_hierarchy).to receive(:retrieve_user).and_return([user])
 
       get "/user"
@@ -116,9 +146,9 @@ RSpec.describe "Facade" do
         user_hierarchy = double(UserHierarchy)
         user = double
 
-        expect(Facade).to receive(:user_json_marshaller).and_return(marshaller)
+        expect(Context).to receive(:user_json_marshaller).and_return(marshaller)
         expect(marshaller).to receive(:to_json).with([user]).and_return(json)
-        expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+        expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
         expect(user_hierarchy).to receive(:retrieve_user_subordinate).and_return([user])
 
         get "/user/1/subordinate"
@@ -131,7 +161,7 @@ RSpec.describe "Facade" do
         error = "coconuts"
         error_json = '{"message":"coconuts"}'
         user_hierarchy = double(UserHierarchy)
-        expect(Facade).to receive(:user_hierarchy).and_return(user_hierarchy)
+        expect(Context).to receive(:user_hierarchy).and_return(user_hierarchy)
         expect(user_hierarchy).to receive(:retrieve_user_subordinate).and_raise(NotFoundError, error)
 
         get "/user/1/subordinate"

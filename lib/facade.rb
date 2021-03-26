@@ -9,7 +9,7 @@ require_relative "marshaller/user_json_marshaller"
 require_relative "domain/factory/user_domain_factory"
 require_relative "repository/user_repository"
 
-module Facade
+module Context
   def self.role_json_marshaller
     @role_json_marshaller ||= RoleJsonMarshaller.new
   end
@@ -44,31 +44,31 @@ end
 
 post "/role" do
   begin
-    Facade.user_hierarchy.create_role Facade.role_json_marshaller.from_json request.body.read
+    Context.user_hierarchy.create_role Context.role_json_marshaller.from_json request.body.read
   rescue ArgumentError => e
     halt 400, { "message" => e.message }.to_json
   end
 end
 
 get "/role" do
-  Facade.role_json_marshaller.to_json Facade.user_hierarchy.retrieve_role
+  Context.role_json_marshaller.to_json Context.user_hierarchy.retrieve_role
 end
 
 post "/user" do
   begin
-    Facade.user_hierarchy.create_user Facade.user_json_marshaller.from_json request.body.read
+    Context.user_hierarchy.create_user Context.user_json_marshaller.from_json request.body.read
   rescue ArgumentError => e
     halt 400, { "message" => e.message }.to_json
   end
 end
 
 get "/user" do
-  Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user
+  Context.user_json_marshaller.to_json Context.user_hierarchy.retrieve_user
 end
 
 get "/user/:id/subordinate" do |id|
   begin
-    Facade.user_json_marshaller.to_json Facade.user_hierarchy.retrieve_user_subordinate id.to_i
+    Context.user_json_marshaller.to_json Context.user_hierarchy.retrieve_user_subordinate id.to_i
   rescue NotFoundError => e
     halt 404, { "message" => e.message }.to_json
   end
