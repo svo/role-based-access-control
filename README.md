@@ -79,6 +79,24 @@ bin/build-development-image
 
 **Note:** to run on another environment you will also need to install [Packer](https://www.packer.io).
 
+## Setup
+
+How you can setup the project dependencies on a `*nix` environment.
+
+If using the `Vagrant` setup run the following:
+
+```
+vagrant up docker
+vagrant ssh
+cd /vagrant
+```
+
+To install the dependencies, run the following command:
+
+```
+bin/setup
+```
+
 ## Test
 
 How you can run the tests on a `*nix` environment to assert the solution behaviours are as expected.
@@ -89,12 +107,6 @@ If using the `Vagrant` setup run the following:
 vagrant up docker
 vagrant ssh
 cd /vagrant
-```
-
-If you are not using the `Vagrant` setup you will want to install the dependencies using:
-
-```
-bin/setup
 ```
 
 You can then run the tests using:
