@@ -36,8 +36,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     virtualbox.vm.hostname = "role-based-access-control-virtualbox"
 
-    virtualbox.vm.synced_folder "#{Dir.home}/.docker", "/home/vagrant/.docker"
-
     virtualbox.vm.provision "ansible" do |ansible|
       ansible.playbook = PLAYBOOK
       ansible.compatibility_mode = "2.0"
