@@ -5,6 +5,7 @@
 ## Links
 
 * [Task Board](https://trello.com/b/x4NnuJmE/)
+* [Decision Register](documentation/decisions)
 * [Continous Integration](https://github.com/svo/role-based-access-control/actions/)
 * [Docker Image for Development](https://hub.docker.com/repository/docker/svanosselaer/role-based-access-control-development)
 
