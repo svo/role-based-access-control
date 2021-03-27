@@ -1,0 +1,22 @@
+@startuml
+
+start
+
+while (tasks remaining in To Do column?)
+  :move task to In Progress column;
+  :define subtask to meet acceptance criteria;
+
+  while (subtask remaining on task)
+    :write unit test;
+    :implement behaviour to pass unit test;
+    :commit change;
+    :mark subtask complete on task;
+    :review against acceptance criteria;
+  endwhile
+
+  :move task to done;
+endwhile
+
+stop
+
+@enduml

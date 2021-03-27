@@ -1,0 +1,18 @@
+@startuml
+
+start
+
+:setup supporting mechanisms for process;
+:problem statement for project;
+
+while (solution decisions required?)
+  :document problem statement;
+  :document solution options;
+  :make decision;
+endwhile
+
+:illustrate solution design;
+
+stop
+
+@enduml
