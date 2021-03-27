@@ -40,14 +40,8 @@
         "echo 'vagrant ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/vagrant",
         "echo 'UseDNS no' >> /etc/ssh/sshd_config",
         "mkdir -p /var/run/sshd",
-        "rm /usr/sbin/policy-rc.d",
-        "mkdir /vagrant"
+        "rm /usr/sbin/policy-rc.d"
       ]
-    },
-    {
-      "type": "file",
-      "source": ".",
-      "destination": "/vagrant/"
     },
     {
       "type": "ansible",
@@ -57,10 +51,6 @@
         "--extra-vars",
         "ansible_host={{user `ansible_host`}} ansible_connection={{user `ansible_connection`}}"
       ]
-    },
-    {
-      "type": "shell",
-      "inline": ["rm -rf /vagrant"]
     }
   ],
   "post-processors": [
