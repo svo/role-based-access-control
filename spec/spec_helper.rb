@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "role_based_access_control"
+require "simplecov"
 
 RSpec.configure do |config|
   ENV["APP_ENV"] = "test"
@@ -14,4 +15,6 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  SimpleCov.start
 end
