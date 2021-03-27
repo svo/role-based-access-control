@@ -6,6 +6,9 @@
 .rspec_status
 rspec_results.html
 
+# rubocop
+rubocop.html
+
 # vim
 *.swa
 *.swp

@@ -35,3 +35,4 @@ jobs:
         path: |
           coverage
           rspec_results.html
+          rubocop.html
