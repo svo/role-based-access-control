@@ -4,6 +4,7 @@
 # rspec
 .rspec
 .rspec_status
+rspec_results.html
 
 # vim
 *.swa
