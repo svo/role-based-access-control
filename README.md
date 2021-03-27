@@ -128,6 +128,12 @@ To run the web application use the following command:
 bin/run
 ```
 
+You can also use the production docker image for the project by running the following:
+
+```
+docker run -d -p 4567:4567 --name=role-based-access-control svanosselaer/role-based-access-control-production:latest
+```
+
 You can now use the API to make the calls required e.g.:
 
 ```

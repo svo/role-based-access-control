@@ -3,4 +3,6 @@ set -euo pipefail
 IFS=$'\n\t'
 set -vx
 
-ruby lib/facade.rb -o 0.0.0.0
+bundle config set --local without 'development'
+
+bin/setup

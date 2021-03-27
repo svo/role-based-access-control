@@ -3,5 +3,5 @@ set -euo pipefail
 IFS=$'\n\t'
 set -vx
 
-packer build -color=false infrastructure/packer/development.json
+packer build -color=false infrastructure/packer/development.json &&
 docker push svanosselaer/role-based-access-control-development:latest

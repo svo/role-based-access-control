@@ -6,4 +6,5 @@ set -vx
 bundle exec rake &&
 semgrep --config "p/ruby" &&
 semgrep --config "p/r2c-ci" &&
-semgrep --config "p/r2c-security-audit"
+semgrep --config "p/r2c-security-audit" &&
+semgrep --config "p/dockerfile"

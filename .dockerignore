@@ -1,0 +1,39 @@
+# MacOS
+.DS_Store
+
+# rspec
+.rspec
+.rspec_status
+
+# vim
+*.swa
+*.swp
+*.swo
+
+# vagrant
+.vagrant
+Vagrantfile
+
+# docker
+.dockerignore
+
+# downloads
+adr-tools-3.0.0.tar.gz
+
+# additional development resources
+.adr-dir
+.git
+.github
+.gitignore
+.rubocop.yml
+.ruby-version
+.vagrant
+Dockerfile
+LICENSE.txt
+README.md
+Rakefile
+documentation
+infrastructure
+role.json
+spec
+user.json
