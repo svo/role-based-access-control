@@ -10,8 +10,8 @@ gem "sinatra", "~> 2.1"
 
 group :development do
   gem "rack-test", "~> 1.1"
-  gem "rake", "~> 13.0"
-  gem "rspec", "~> 3.0"
-  gem "rubocop", "~> 1.7"
+  gem "rake", "~> 13.0", ">= 13.0.3"
+  gem "rspec", "~> 3.10"
+  gem "rubocop", "~> 1.12"
   gem "simplecov", "~> 0.21.2"
 end

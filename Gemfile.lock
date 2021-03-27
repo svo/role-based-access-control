@@ -78,10 +78,10 @@ DEPENDENCIES
   json-schema (~> 2.8, >= 2.8.1)
   puma (~> 5.2, >= 5.2.2)
   rack-test (~> 1.1)
-  rake (~> 13.0)
+  rake (~> 13.0, >= 13.0.3)
   role_based_access_control!
-  rspec (~> 3.0)
-  rubocop (~> 1.7)
+  rspec (~> 3.10)
+  rubocop (~> 1.12)
   simplecov (~> 0.21.2)
   sinatra (~> 2.1)
 
