@@ -9,24 +9,19 @@ PLAYBOOK = "infrastructure/ansible/playbook-development.yml"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "docker", primary: true do |docker|
     docker.vm.hostname = "role-based-access-control-docker"
-    docker.vm.provision "shell", path: "bin/copy-ssh-key-to-docker-container", args: "docker"
-
-    docker.vm.provision "shell", privileged: true, run: "always", inline: <<-SHELL
-      chgrp vagrant /var/run/docker.sock
-    SHELL
 
     docker.vm.provider :docker do |d|
       d.image = "svanosselaer/role-based-access-control-development"
       d.remains_running = true
       d.has_ssh = true
       d.pull = true
-      d.create_args = [
-        "-v", "//var/run/docker.sock:/var/run/docker.sock",
-        "-v", "#{ENV["HOME"]}/.docker:/home/vagrant/.docker"
-      ]
       d.cmd = [
         "/usr/sbin/sshd",
         "-D"
+      ]
+      d.volumes = [
+        "/var/run/docker.sock:/var/run/docker.sock",
+        "#{ENV["HOME"]}/.docker:/home/vagrant/.docker"
       ]
     end
   end
