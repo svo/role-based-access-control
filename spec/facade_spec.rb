@@ -15,28 +15,63 @@ RSpec.describe "Context" do
       expect(Context.role_json_marshaller).to be_an_instance_of(RoleJsonMarshaller)
     end
 
+    it "always returns the same role JSON marshaller" do
+      marshaller = Context.role_json_marshaller
+      expect(Context.role_json_marshaller).to eq(marshaller)
+    end
+
     it "has a user JSON marshaller" do
       expect(Context.user_json_marshaller).to be_an_instance_of(UserJsonMarshaller)
+    end
+
+    it "always returns the same user JSON marshaller" do
+      marshaller = Context.user_json_marshaller
+      expect(Context.user_json_marshaller).to eq(marshaller)
     end
 
     it "has a role repository" do
       expect(Context.role_repository).to be_an_instance_of(RoleRepository)
     end
 
+    it "always returns the same role repository" do
+      repository = Context.role_repository
+      expect(Context.role_repository).to eq(repository)
+    end
+
     it "has a role domain factory" do
       expect(Context.role_domain_factory).to be_an_instance_of(RoleDomainFactory)
+    end
+
+    it "always returns the same role domain factory" do
+      factory = Context.role_domain_factory
+      expect(Context.role_domain_factory).to eq(factory)
     end
 
     it "has a user repository" do
       expect(Context.user_repository).to be_an_instance_of(UserRepository)
     end
 
+    it "always returns the same user repository" do
+      repository = Context.user_repository
+      expect(Context.user_repository).to eq(repository)
+    end
+
     it "has a user domain factory" do
       expect(Context.user_domain_factory).to be_an_instance_of(UserDomainFactory)
     end
 
+    it "always returns the same user domain factory" do
+      factory = Context.user_domain_factory
+      expect(Context.user_domain_factory).to eq(factory)
+    end
+
     it "has a user hierarchy" do
       expect(Context.user_hierarchy).to be_an_instance_of(UserHierarchy)
+    end
+
+    it "always returns the same user user hierarchy" do
+      hierarchy = Context.user_hierarchy
+      expect(Context.user_hierarchy).to eq(hierarchy)
     end
   end
 
