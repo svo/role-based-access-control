@@ -42,3 +42,9 @@ infrastructure
 role.json
 spec
 user.json
+
+# semgrep
+semgrep-ci.xml
+semgrep-docker.xml
+semgrep-ruby.xml
+semgrep-security.xml

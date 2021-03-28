@@ -25,3 +25,9 @@ rubocop.html
 
 # downloads
 adr-tools-3.0.0.tar.gz
+
+# semgrep
+semgrep-ci.xml
+semgrep-docker.xml
+semgrep-ruby.xml
+semgrep-security.xml

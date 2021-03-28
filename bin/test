@@ -4,7 +4,7 @@ IFS=$'\n\t'
 set -vx
 
 bundle exec rake &&
-semgrep --config "p/ruby" &&
-semgrep --config "p/r2c-ci" &&
-semgrep --config "p/r2c-security-audit" &&
-semgrep --config "p/dockerfile"
+semgrep --config "p/ruby" --error --junit-xml --output semgrep-ruby.xml &&
+semgrep --config "p/r2c-ci" --error --junit-xml --output semgrep-ci.xml &&
+semgrep --config "p/r2c-security-audit" --error --junit-xml --output semgrep-security.xml &&
+semgrep --config "p/dockerfile" --error --junit-xml --output semgrep-docker.xml
