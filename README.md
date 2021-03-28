@@ -2,6 +2,10 @@
 
 [![Actions Status](https://github.com/svo/role-based-access-control/actions/workflows/main.yml/badge.svg)](https://github.com/svo/role-based-access-control/actions/)
 
+## Note
+
+This is a naive project being used to demonstrate patterns and practices and is in no way to be considered production appropriate/complete.
+
 ## Links
 
 * [Task Board](https://trello.com/b/x4NnuJmE/)
