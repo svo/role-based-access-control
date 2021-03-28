@@ -175,3 +175,21 @@ We are using [adr-tools](https://github.com/npryce/adr-tools) to capture project
 ### Class Diagram
 
 ![Class Diagram](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/architecture/class.png)
+
+## System Of Work
+
+### 1. Know What We Are Doing
+
+![Know What We Are Doing](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/process-so-we-know-what-we-are-doing.png)
+
+### 2. So We Can Implement
+
+![So We Can Implement](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/process-so-we-can-start-implementation.png)
+
+### 3. Plan
+
+![Planning](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/process-plan-tasks.png)
+
+### 4. Implement
+
+![Execution](https://raw.githubusercontent.com/svo/role-based-access-control/main/documentation/process-do-task.png)
