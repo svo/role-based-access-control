@@ -7,7 +7,6 @@ start
 :add dynamic testing mechanisms;
 :add static testing mechanisms;
 :setup continuous integration;
-:illustrate solution design;
 
 stop
 

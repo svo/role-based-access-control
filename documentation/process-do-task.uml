@@ -2,20 +2,24 @@
 
 start
 
-while (tasks remaining in To Do column?)
+while (tasks remaining in To Do column?) is (yes)
   :move task to In Progress column;
   :define subtask to meet acceptance criteria;
 
-  while (subtask remaining on task)
-    :write unit test;
-    :implement behaviour to pass unit test;
-    :commit change;
-    :mark subtask complete on task;
+  while (acceptance criteria not satisfied?) is (yes)
+    while (subtask remaining on task?) is (yes)
+      :write unit test;
+      :implement behaviour to pass unit test;
+      :commit change;
+      :mark subtask complete on task;
+    endwhile (no)
+
     :review against acceptance criteria;
-  endwhile
+
+  endwhile (no)
 
   :move task to done;
-endwhile
+endwhile (no)
 
 stop
 

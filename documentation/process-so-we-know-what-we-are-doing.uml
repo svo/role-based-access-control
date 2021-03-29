@@ -5,11 +5,11 @@ start
 :setup supporting mechanisms for process;
 :problem statement for project;
 
-while (solution decisions required?)
+while (solution decisions required?) is (yes)
   :document problem statement;
   :document solution options;
   :make decision;
-endwhile
+endwhile (no)
 
 :illustrate solution design;
 
