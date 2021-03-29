@@ -11,6 +11,7 @@ while (tasks remaining in to do column?) is (yes)
       :write unit test;
       :implement behaviour to pass unit test;
       :commit change;
+      :push change;
       :mark subtask complete on task;
     endwhile (no)
 
