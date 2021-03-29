@@ -10,7 +10,7 @@ This is a naive project being used to demonstrate patterns and practices and is 
 
 * [Task Board](https://trello.com/b/x4NnuJmE/)
   * the desired experience will require:
-    * you to be added to the Team in `Trello` if you want the desired experience
+    * you to be added to the Team in `Trello`
     * you to allow access to the board for the `Scaled` Power-Up
 * [Decision Register](documentation/decisions)
 * [Continous Integration](https://github.com/svo/role-based-access-control/actions/)
