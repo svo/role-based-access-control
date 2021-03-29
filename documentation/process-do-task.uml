@@ -2,8 +2,8 @@
 
 start
 
-while (tasks remaining in To Do column?) is (yes)
-  :move task to In Progress column;
+while (tasks remaining in to do column?) is (yes)
+  :move task to doing column;
   :define subtask to meet acceptance criteria;
 
   while (acceptance criteria not satisfied?) is (yes)
@@ -18,7 +18,7 @@ while (tasks remaining in To Do column?) is (yes)
 
   endwhile (no)
 
-  :move task to done;
+  :move task to done column;
 endwhile (no)
 
 stop
