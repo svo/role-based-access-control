@@ -3,12 +3,12 @@
 require_relative "../user"
 require_relative "../../repository/role_repository"
 
-class UserDomainFactory
+class UserDataTransferObjectTransformer
   def initialize(role_repository)
     @role_repository = role_repository
   end
 
-  def build(data_transfer_object)
+  def transform(data_transfer_object)
     validate_no_duplicate(data_transfer_object)
 
     data_transfer_object.map do |user|

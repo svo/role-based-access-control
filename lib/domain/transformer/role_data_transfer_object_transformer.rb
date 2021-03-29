@@ -2,8 +2,8 @@
 
 require_relative "../role"
 
-class RoleDomainFactory
-  def build(data_transfer_object)
+class RoleDataTransferObjectTransformer
+  def transform(data_transfer_object)
     validate_no_duplicate(data_transfer_object)
 
     domain = data_transfer_object.map { |role| Role.new(role["Id"], role["Name"]) }

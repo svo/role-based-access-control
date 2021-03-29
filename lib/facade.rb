@@ -3,10 +3,10 @@
 require "sinatra"
 require_relative "user_hierarchy"
 require_relative "marshaller/role_json_marshaller"
-require_relative "domain/factory/role_domain_factory"
+require_relative "domain/transformer/role_data_transfer_object_transformer"
 require_relative "repository/role_repository"
 require_relative "marshaller/user_json_marshaller"
-require_relative "domain/factory/user_domain_factory"
+require_relative "domain/transformer/user_data_transfer_object_transformer"
 require_relative "repository/user_repository"
 
 module Context
@@ -22,22 +22,22 @@ module Context
     @role_repository ||= RoleRepository.new
   end
 
-  def self.role_domain_factory
-    @role_domain_factory ||= RoleDomainFactory.new
+  def self.role_data_transfer_object_transformer
+    @role_data_transfer_object_transformer ||= RoleDataTransferObjectTransformer.new
   end
 
   def self.user_repository
     @user_repository ||= UserRepository.new
   end
 
-  def self.user_domain_factory
-    @user_domain_factory ||= UserDomainFactory.new(@role_repository)
+  def self.user_data_transfer_object_transformer
+    @user_data_transfer_object_transformer ||= UserDataTransferObjectTransformer.new(@role_repository)
   end
 
   def self.user_hierarchy
-    @user_hierarchy ||= UserHierarchy.new(role_domain_factory,
+    @user_hierarchy ||= UserHierarchy.new(role_data_transfer_object_transformer,
                                           role_repository,
-                                          user_domain_factory,
+                                          user_data_transfer_object_transformer,
                                           user_repository)
   end
 end

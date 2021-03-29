@@ -38,13 +38,13 @@ RSpec.describe "Context" do
       expect(Context.role_repository).to eq(repository)
     end
 
-    it "has a role domain factory" do
-      expect(Context.role_domain_factory).to be_an_instance_of(RoleDomainFactory)
+    it "has a role domain transformer" do
+      expect(Context.role_data_transfer_object_transformer).to be_an_instance_of(RoleDataTransferObjectTransformer)
     end
 
-    it "always returns the same role domain factory" do
-      factory = Context.role_domain_factory
-      expect(Context.role_domain_factory).to eq(factory)
+    it "always returns the same role domain transformer" do
+      transformer = Context.role_data_transfer_object_transformer
+      expect(Context.role_data_transfer_object_transformer).to eq(transformer)
     end
 
     it "has a user repository" do
@@ -56,13 +56,13 @@ RSpec.describe "Context" do
       expect(Context.user_repository).to eq(repository)
     end
 
-    it "has a user domain factory" do
-      expect(Context.user_domain_factory).to be_an_instance_of(UserDomainFactory)
+    it "has a user domain transformer" do
+      expect(Context.user_data_transfer_object_transformer).to be_an_instance_of(UserDataTransferObjectTransformer)
     end
 
-    it "always returns the same user domain factory" do
-      factory = Context.user_domain_factory
-      expect(Context.user_domain_factory).to eq(factory)
+    it "always returns the same user domain transformer" do
+      transformer = Context.user_data_transfer_object_transformer
+      expect(Context.user_data_transfer_object_transformer).to eq(transformer)
     end
 
     it "has a user hierarchy" do

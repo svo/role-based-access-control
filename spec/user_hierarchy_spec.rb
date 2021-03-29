@@ -2,12 +2,13 @@
 
 RSpec.describe UserHierarchy do
   before(:each) do
-    @role_domain_factory = double(RoleDomainFactory)
+    @role_data_transfer_object_transformer = double(RoleDataTransferObjectTransformer)
     @role_repository = double(RoleRepository)
-    @user_domain_factory = double(UserDomainFactory)
+    @user_data_transfer_object_transformer = double(UserDataTransferObjectTransformer)
     @user_repository = double(UserRepository)
 
-    @subject = described_class.new(@role_domain_factory, @role_repository, @user_domain_factory, @user_repository)
+    @subject = described_class.new(@role_data_transfer_object_transformer, @role_repository,
+                                   @user_data_transfer_object_transformer, @user_repository)
   end
 
   describe "roles" do
@@ -15,7 +16,9 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      expect(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
+      expect(@role_data_transfer_object_transformer).to receive(:transform)
+        .with(role_transfer_object)
+        .and_return([role])
       allow(@user_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:insert).with(role)
@@ -27,7 +30,7 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      allow(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
+      allow(@role_data_transfer_object_transformer).to receive(:transform).with(role_transfer_object).and_return([role])
       allow(@user_repository).to receive(:delete_all)
       expect(@role_repository).to receive(:delete_all).ordered
       expect(@role_repository).to receive(:insert).with(role).ordered
@@ -39,7 +42,7 @@ RSpec.describe UserHierarchy do
       role_transfer_object = double
       role = double(Role)
 
-      allow(@role_domain_factory).to receive(:build).with(role_transfer_object).and_return([role])
+      allow(@role_data_transfer_object_transformer).to receive(:transform).with(role_transfer_object).and_return([role])
       expect(@user_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:delete_all)
       allow(@role_repository).to receive(:insert).with(role)
@@ -61,7 +64,9 @@ RSpec.describe UserHierarchy do
       user_transfer_object = double
       user = double(User)
 
-      expect(@user_domain_factory).to receive(:build).with(user_transfer_object).and_return([user])
+      expect(@user_data_transfer_object_transformer).to receive(:transform)
+        .with(user_transfer_object)
+        .and_return([user])
       allow(@user_repository).to receive(:delete_all)
       expect(@user_repository).to receive(:insert).with(user)
 
@@ -72,7 +77,7 @@ RSpec.describe UserHierarchy do
       user_transfer_object = double
       user = double(Role)
 
-      allow(@user_domain_factory).to receive(:build).with(user_transfer_object).and_return([user])
+      allow(@user_data_transfer_object_transformer).to receive(:transform).with(user_transfer_object).and_return([user])
       expect(@user_repository).to receive(:delete_all).ordered
       expect(@user_repository).to receive(:insert).with(user).ordered
 
