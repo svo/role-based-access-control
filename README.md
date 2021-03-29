@@ -9,6 +9,9 @@ This is a naive project being used to demonstrate patterns and practices and is 
 ## Links
 
 * [Task Board](https://trello.com/b/x4NnuJmE/)
+  * the desired experience will require:
+    * you to be added to the Team in `Trello` if you want the desired experience
+    * you to allow access to the board for the `Scaled` Power-Up
 * [Decision Register](documentation/decisions)
 * [Continous Integration](https://github.com/svo/role-based-access-control/actions/)
 * [Docker Image - Development with Vagrant](https://hub.docker.com/repository/docker/svanosselaer/role-based-access-control-development)
